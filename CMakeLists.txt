@@ -14,10 +14,6 @@ endif()
 
 set(VCLIBS_SUFFIX "_oss")
 
-if(NOT VCPKG_TARGET_TRIPLET)
-    message(FATAL_ERROR "You must set VCPKG_TARGET_TRIPLET.")
-endif()
-
 if(NOT DEFINED VCLIBS_TARGET_ARCHITECTURE)
     set(VCLIBS_TARGET_ARCHITECTURE "${CMAKE_CXX_COMPILER_ARCHITECTURE_ID}")
 endif()
@@ -67,8 +63,7 @@ add_compile_definitions(
     _CRT_DECLARE_NONSTDC_NAMES=1 )
 
 # TRANSITION, /analyze ?
-# TRANSITION, /d2FH4- ?
-add_compile_options(/diagnostics:caret /W4 /WX /w14265 /w15038 /d1FastFail /guard:cf /Z7 /d2Zi+ /Gm- /Gy /Zp8 /std:c++latest /permissive- /Zc:threadSafeInit- /d2FH4-)
+add_compile_options(/diagnostics:caret /W4 /WX /w14265 /w15038 /d1FastFail /guard:cf /Z7 /d2Zi+ /Gm- /Gy /Zp8 /std:c++latest /permissive- /Zc:threadSafeInit-)
 
 set(VCLIBS_DEBUG_OPTIONS "/Od")
 set(VCLIBS_RELEASE_FLAGS "/O2;/Os") # TRANSITION: Potentially remove /Os

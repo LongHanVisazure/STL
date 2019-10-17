@@ -21,6 +21,8 @@
 // _HAS_CXX20 directly controls:
 // P0020R6 atomic<float>, atomic<double>, atomic<long double>
 // P0318R1 unwrap_reference, unwrap_ref_decay
+// P0325R4 to_array()
+// P0439R0 enum class memory_order
 // P0457R2 starts_with()/ends_with() For basic_string/basic_string_view
 // P0458R2 contains() For Ordered And Unordered Associative Containers
 // P0463R1 endian
@@ -42,6 +44,9 @@
 //     (partially implemented)
 // P0898R3 Standard Library Concepts
 // P0919R3 Heterogeneous Lookup For Unordered Containers
+// P1227R2 Signed std::ssize(), Unsigned span::size()
+//     (partially implemented)
+// P1357R1 is_bounded_array, is_unbounded_array
 // P1754R1 Rename Concepts To standard_case
 // P????R? directory_entry::clear_cache()
 
@@ -99,9 +104,9 @@
 // P0004R1 Removing Deprecated Iostreams Aliases
 // P0298R3 std::byte
 // P0302R1 Removing Allocator Support In std::function
-// LWG 2385 function::assign allocator argument doesn't make sense
-// LWG 2921 packaged_task and type-erased allocators
-// LWG 2976 Dangling uses_allocator specialization for packaged_task
+// LWG-2385 function::assign allocator argument doesn't make sense
+// LWG-2921 packaged_task and type-erased allocators
+// LWG-2976 Dangling uses_allocator specialization for packaged_task
 // The non-Standard std::tr1 namespace and TR1-only machinery
 // Enforcement of matching allocator value_types
 
@@ -468,9 +473,9 @@
 #endif // _HAS_STD_BYTE
 
 // P0302R1 Removing Allocator Support In std::function
-// LWG 2385 function::assign allocator argument doesn't make sense
-// LWG 2921 packaged_task and type-erased allocators
-// LWG 2976 Dangling uses_allocator specialization for packaged_task
+// LWG-2385 function::assign allocator argument doesn't make sense
+// LWG-2921 packaged_task and type-erased allocators
+// LWG-2976 Dangling uses_allocator specialization for packaged_task
 #ifndef _HAS_FUNCTION_ALLOCATOR_SUPPORT
 #define _HAS_FUNCTION_ALLOCATOR_SUPPORT (!_HAS_CXX17)
 #endif // _HAS_FUNCTION_ALLOCATOR_SUPPORT
@@ -888,6 +893,7 @@
 
 // C++20
 #if _HAS_CXX20
+#define __cpp_lib_bounded_array_traits 201902L
 #ifdef __cpp_char8_t
 #define __cpp_lib_char8_t 201811L
 #endif // __cpp_char8_t
@@ -912,6 +918,7 @@
 
 #define __cpp_lib_generic_unordered_lookup 201811L
 #define __cpp_lib_list_remove_return_type 201806L
+#define __cpp_lib_to_array 201907L
 #endif // _HAS_CXX20
 
 // EXPERIMENTAL

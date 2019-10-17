@@ -552,7 +552,6 @@ public:
     }
 
 private:
-    // _Move_from is an ABI zombie name
     void _Move_construct(vector& _Right, true_type) noexcept { // move from _Right, stealing its contents
         _Mypair._Myval2._Take_contents(_Right._Mypair._Myval2);
     }
@@ -603,7 +602,7 @@ private:
         _Tidy();
 #if _ITERATOR_DEBUG_LEVEL != 0
         if (_Getal() != _Right._Getal()) {
-            // intentionally slams into noexcept on OOM, TRANSITION, VSO#466800
+            // intentionally slams into noexcept on OOM, TRANSITION, VSO-466800
             _Mypair._Myval2._Reload_proxy(
                 _GET_PROXY_ALLOCATOR(_Alty, _Getal()), _GET_PROXY_ALLOCATOR(_Alty, _Right._Getal()));
         }
@@ -1574,8 +1573,6 @@ public:
     }
 
 private:
-    // _Udefault is an ABI zombie name
-
     pointer _Ufill(pointer _Dest, const size_type _Count, const _Ty& _Val) {
         // fill raw _Dest with _Count copies of _Val, using allocator
         return _Uninitialized_fill_n(_Dest, _Count, _Val, _Getal());
@@ -1632,7 +1629,6 @@ private:
         return _Geometric; // geometric growth is sufficient
     }
 
-    // _Buy is an ABI zombie name
     void _Buy_raw(const size_type _Newcapacity) {
         // allocate array with _Newcapacity elements
         auto& _My_data    = _Mypair._Myval2;
@@ -1879,7 +1875,7 @@ public:
         const auto _Cont = static_cast<const _Mycont*>(this->_Getcont());
         _STL_VERIFY(_Cont, "cannot dereference value-initialized vector<bool> iterator");
         _STL_VERIFY(this->_Total_off(_Cont) <= static_cast<_Difference_type>(_Cont->_Mysize),
-            "vector<bool> iterator not dereferencable");
+            "vector<bool> iterator not dereferenceable");
 #endif // _ITERATOR_DEBUG_LEVEL != 0
 
         return this->_Myptr;
@@ -1925,7 +1921,7 @@ public:
         const auto _Cont = static_cast<const _Mycont*>(this->_Getcont());
         _STL_VERIFY(_Cont, "cannot dereference value-initialized vector<bool> iterator");
         _STL_VERIFY(this->_Total_off(_Cont) < static_cast<_Difference_type>(_Cont->_Mysize),
-            "vector<bool> iterator not dereferencable");
+            "vector<bool> iterator not dereferenceable");
 #endif // _ITERATOR_DEBUG_LEVEL != 0
 
         return _Reft(*this);
@@ -2109,7 +2105,7 @@ public:
         const auto _Cont = static_cast<const _Mycont*>(this->_Getcont());
         _STL_VERIFY(_Cont, "cannot dereference value-initialized vector<bool> iterator");
         _STL_VERIFY(this->_Total_off(_Cont) < static_cast<_Difference_type>(_Cont->_Mysize),
-            "vector<bool> iterator not dereferencable");
+            "vector<bool> iterator not dereferenceable");
 #endif // _ITERATOR_DEBUG_LEVEL != 0
 
         return _Reft(*this);
@@ -2337,7 +2333,7 @@ private:
     void _Move_assign(vector& _Right, _Propagate_allocators) noexcept {
         using _Alproxy_type = _Rebind_alloc_t<_Alvbase, _Container_proxy>;
         if (this->_Getal() != _Right._Getal()) { // reload proxy
-            // intentionally slams into noexcept on OOM, TRANSITION, VSO#466800
+            // intentionally slams into noexcept on OOM, TRANSITION, VSO-466800
             _Alproxy_type _Oldal(this->_Getal());
             _Alproxy_type _Right_proxy_al(_Right._Getal());
             _Container_proxy_ptr<_Alvbase> _Proxy(_Right_proxy_al, _Leave_proxy_unbound{});
